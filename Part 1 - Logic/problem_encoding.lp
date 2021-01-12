@@ -3,6 +3,7 @@
 #const k=2.
 #const t=2.
 #const a=2.
+#const c=1000.
 
 
 % There are n districts 1..n
@@ -24,6 +25,3 @@ district(1..n).
 {req(D,T):team(T)} = a :- district(D).
 D1 = D2 :- req(D1,T), req(D2,T).
 
-% district(1..n).
-% {requires(D,T):team(T)} = a :- district(D).
-% D1 = D2 :-  requires(D1, T), requires(D2, T).
