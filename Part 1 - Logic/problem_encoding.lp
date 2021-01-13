@@ -12,17 +12,26 @@ inexperienced(k+1..m).
 % 1...k experienced companies
 % K+1...m inexperienced companies
 
+a_j(1, 1).
+a_j(2, 1).
+% Achieved:
+% Hard code the number of teams each district needs
+
 team(1..t*m).
-has((X/(t+1))+1,X) :- team(X).
+has((X / (t + 1)) + 1, X) :- team(X).
 % Achieved:
 % t teams for m companies divided equally
 
 district(1..n).
-{req(D,T):team(T)} = a :- district(D).
-D1 = D2 :- req(D1,T), req(D2,T).
+{req(D, T): team(T)} :- district(D).
+D1 = D2 :- req(D1, T), req(D2, T).
 % Achieved:
 % Each district requires a teams
 
-:- D = 1..n, #count{T: experienced(C),req(D,T),has(C,T),company(C),team(T)} = 0.
+:- D = 1..n, #count{T: experienced(C), req(D, T), has(C, T), company(C), team(T)} = 0.
 % Achieved:
 % Each district get at least 1 experienced team
+
+:- D = 1..n, TEAMS = #count{T: req(D, T), has(C, T), company(C), team(T)}, a_j(D, X), X != TEAMS.
+% Achieved:
+% Each district cannot have the incorrect number of teams
