@@ -52,10 +52,10 @@ D1 = D2 :- req(D1, T), req(D2, T).
 % Each district cannot have the incorrect number of teams.
 
 
-cost(X,D) :- X = #sum{Y,C: req(D,T), has(C,T), companycost(C, Y)}, district(D), team(T).
+cost(X,D) :- X = #sum{Y: req(D,T), has(C,T), companycost(C, Y)}, district(D), team(T).
 cost(X) :- X = #sum{C,D: cost(C,D)}.
 #minimize{C,D: cost(C,D)}.
 % Achieved:
 % Minimize total cost.
 
-% #show cost/1.
+#show cost/1.
