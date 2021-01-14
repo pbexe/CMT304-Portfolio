@@ -1,21 +1,23 @@
-#const n=2.
-#const m=3.
-#const k=1.
+#const n=3.
+#const m=4.
+#const k=2.
 
 companycost(1,4; % Cost of a team from each company
-            2,5;
-            3,3).
-
+            2,3;
+            3,2;
+            4,1).
 t_i(1,2; % Number of teams each company has
     2,1;
-    3,1).
-
-maxteams(X) :- X = #sum{N,T: t_i(T,N)}.
-
+    3,5;
+    4,8).
 a_j(1, 2; % Number of teams each district requires
-    2, 1).
+    2, 3;
+    3, 1).
 % Achieved:
 % urgh TODO: Reduce the number of constants needed
+
+
+maxteams(X) :- X = #sum{N,T: t_i(T,N)}.
 
 company(1..m).
 experienced(1..k).
@@ -52,10 +54,10 @@ D1 = D2 :- req(D1, T), req(D2, T).
 % Each district cannot have the incorrect number of teams.
 
 
-cost(X,D) :- X = #sum{Y: req(D,T), has(C,T), companycost(C, Y)}, district(D), team(T).
+cost(X,D) :- X = #sum{Y: req(D,T), has(C,T), companycost(C, Y)}, district(D).
 cost(X) :- X = #sum{C,D: cost(C,D)}.
 #minimize{C,D: cost(C,D)}.
 % Achieved:
 % Minimize total cost.
 
-#show cost/1.
+% #show cost/1.
