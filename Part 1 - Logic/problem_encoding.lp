@@ -19,7 +19,7 @@
 %     • Enough teams must be allocated to meet the demand in each district.
 %     • No company can be asked to provide more teams than it still has available.
 %     • The cost must be minimised.
-% Task 1:
+% 
 % 1. Write a logic program in ASP (problem encoding.lp) which finds all solutions to the
 % problem, given n, m, k, ti, aj, ci,j for all 1 ≤ i ≤ m, 1 ≤ j ≤ n. Document your code
 % so the following is clear.
@@ -31,9 +31,9 @@
 %    program. Document your code so it is clear what the instance is modeling.
 
 
+#const k=2. % Number of experienced companies
 #const n=3. % Number of districts
 #const m=4. % Number of companies
-#const k=2. % Number of experienced companies
 
 c_ij( % Cost of a team for each company (i) for each district (j).
    % i j c
@@ -106,6 +106,8 @@ cost(X) :- X = #sum{C, D: cost(C, D)}.
 % Achieved:
 % Minimize total cost.
 
-#show cost/1. #show has/2. #show req/2.
+allocate(C,D,X) :- D=1..n, req(D,T), has(C,T), X = #count{T, req(D,T), has(C,T)}. % Maybe correct?
+
+% #show allocate/3.
 % Achieved:
 % Shows the data required to implement the optimum team division stratergy.
