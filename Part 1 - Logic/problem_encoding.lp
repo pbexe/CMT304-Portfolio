@@ -31,39 +31,6 @@
 %    program. Document your code so it is clear what the instance is modeling.
 
 
-#const k=2. % Number of experienced companies
-#const n=3. % Number of districts
-#const m=4. % Number of companies
-
-c_ij( % Cost of a team for each company (i) for each district (j).
-   % i j c
-     1,1,4;
-     1,2,4;
-     1,3,4;
-     2,1,3;
-     2,2,3;
-     2,3,3;
-     3,1,2;
-     3,2,2;
-     3,3,2;
-     4,1,1;
-     4,2,1;
-     4,3,1;
-).
-t_i( % Number of teams each company has.
-    1,2; 
-    2,1;
-    3,5;
-    4,1;
-).
-a_j( % Number of teams each district requires.
-    1, 2;
-    2, 3;
-    3, 1;
-).
-% Achieved:
-% All constants defined
-
 maxteams(X) :- X = #sum{N, T: t_i(T, N)}.
 % Achieved:
 % Number of teams to create is calculated.
@@ -100,14 +67,21 @@ D1 = D2 :- req(D1, T), req(D2, T).
 % Achieved:
 % Each district cannot have the incorrect number of teams.
 
-cost(X, D) :- X = #sum{Y, D: req(D, T), has(C, T), c_ij(C, D, Y)}, district(D).
+allocate(C,D,T) :- company(C), district(D), req(D,T), has(C,T).
+% Achieved:
+% Work out which companies allocate which teams to which districts.
+
+allocate_agg(C,D,X) :- X = #count{T: allocate(C,D,T)}, district(D), company(C).
+% :- C=1..m, D=1..n, allocate_agg(C,D,X), X=0.
+% Achieved:
+% Sum the company-district-team alloccations as per the question.
+
+cost(X, D) :- X = #sum{Y: req(D, T), has(C, T), c_ij(C, D, Y)}, district(D).
 cost(X) :- X = #sum{C, D: cost(C, D)}.
 #minimize{C, D: cost(C, D)}.
 % Achieved:
 % Minimize total cost.
 
-allocate(C,D,X) :- D=1..n, req(D,T), has(C,T), X = #count{T, req(D,T), has(C,T)}. % Maybe correct?
-
-% #show allocate/3.
+#show allocate_agg/3.
 % Achieved:
 % Shows the data required to implement the optimum team division stratergy.
