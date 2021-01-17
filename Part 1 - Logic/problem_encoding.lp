@@ -37,7 +37,7 @@
 
 maxteams(X) :- X = #sum{N, T: t_i(T, N)}.
 % Achieved:
-% Number of teams to create is calculated.
+% Number of teams to create is calculated. Sums the total given by t_i.
 
 company(1..m).
 experienced(1..k).
@@ -48,8 +48,12 @@ inexperienced(k + 1..m).
 % K+1...m inexperienced companies.
 
 team(1..M) :- M = #sum{X: maxteams(X)}.
+% M is calculated from the maxteams atom.
 {has(C, T): team(T)} :- company(C).
+% Generate every combination of company-team relationships
 C1 = C2 :- has(C1, T), has(C2, T).
+% If 2 companies have the same team, they must be the same company.
+
 % Achieved:
 % All combinations of teams amongst companies.
 
@@ -58,14 +62,20 @@ C1 = C2 :- has(C1, T), has(C2, T).
 % A company that has the wrong amount of teams cannot exist.
 
 district(1..n).
+% Generate 1 to n districts
 {req(D, T): team(T)} :- district(D).
+% Generate every combination of district-team relationships
 D1 = D2 :- req(D1, T), req(D2, T).
+% If 2 districts have the same team, they must be the same district.
+
 % Achieved:
-% Each district requires a team. 2 districts are the same if the same team is required by each of them.
+% Each district requires a team. 2 districts are the same if the same team is
+% required by each of them.
 
 :- D = 1..n, #count{T: experienced(C), req(D, T), has(C, T), company(C), team(T)} = 0.
 % Achieved:
-% Each district get at least 1 experienced team. ie: It cannot be the case that a district as 0 teams.
+% Each district get at least 1 experienced team. ie: It cannot be the case that
+% a district as 0 teams.
 
 :- D = 1..n, TEAMS = #count{T: req(D, T), has(C, T), company(C), team(T)}, a_j(D, X), X != TEAMS.
 % Achieved:
@@ -81,7 +91,7 @@ allocate_agg(C,D,X) :- X = #count{T: allocate(C,D,T)}, district(D), company(C).
 % Sum the company-district-team alloccations as per the question.
 
 cost(X, D) :- X = #sum{Y: req(D, T), has(C, T), c_ij(C, D, Y)}, district(D).
-cost(X) :- X = #sum{C, D: cost(C, D)}.
+% The cost per district.
 #minimize{C, D: cost(C, D)}.
 % Achieved:
 % Minimize total cost.
