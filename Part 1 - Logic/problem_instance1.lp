@@ -1,6 +1,9 @@
 % name = Miles Budden
 % S# = C1769331
 
+% Instance 1:
+% 1 experienced company with more than enough teams for the districts.
+
 
 #const k=1. % Number of experienced companies
 #const n=2. % Number of districts

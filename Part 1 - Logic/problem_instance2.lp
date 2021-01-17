@@ -1,6 +1,9 @@
 % name = Miles Budden
 % S# = C1769331
 
+% Instance 2
+% 2 companies, one of which is experienced. The experienced company is much
+% more expensive.
 
 #const k=1. % Number of experienced companies
 #const n=2. % Number of districts

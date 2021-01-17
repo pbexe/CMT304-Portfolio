@@ -1,6 +1,9 @@
 % name = Miles Budden
 % S# = C1769331
 
+% Instance 3:
+% 3 companies, one of which is experienced and expensive. One of the companies
+% has many teams that significantly increases the complexity of the problem.
 
 #const k=1. % Number of experienced companies
 #const n=4. % Number of districts
@@ -19,12 +22,7 @@ c_ij( % Cost of a team for each company (i) for each district (j).
      3,1,5;
      3,2,6;
      3,3,7;
-     3,4,8;
-     4,1,5;
-     4,2,6;
-     4,3,7;
-     4,4,8
-
+     3,4,8
 ).
 t_i( % Number of teams each company has.
     1,4; 
