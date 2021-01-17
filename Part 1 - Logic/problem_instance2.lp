@@ -5,6 +5,9 @@
 % 2 companies, one of which is experienced. The experienced company is much
 % more expensive.
 
+% USAGE:
+% $ clingo problem_instance2.lp 0
+
 #const k=1. % Number of experienced companies
 #const n=2. % Number of districts
 #const m=2. % Number of companies

@@ -4,6 +4,9 @@
 % Instance 1:
 % 1 experienced company with more than enough teams for the districts.
 
+% USAGE:
+% $ clingo problem_instance1.lp 0
+
 
 #const k=1. % Number of experienced companies
 #const n=2. % Number of districts

@@ -5,6 +5,9 @@
 % 3 companies, one of which is experienced and expensive. One of the companies
 % has many teams that significantly increases the complexity of the problem.
 
+% USAGE:
+% $ clingo problem_instance3.lp 0
+
 #const k=1. % Number of experienced companies
 #const n=4. % Number of districts
 #const m=3. % Number of companies
