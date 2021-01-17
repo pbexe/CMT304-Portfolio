@@ -1,3 +1,7 @@
+% name = Miles Budden
+% S# = C1769331
+
+
 % Consider the following situation:
 % The public works division in a region has the responsibility to subcontract
 % work to private companies. There are several types of tasks. Each task is carried

@@ -1,3 +1,7 @@
+% name = Miles Budden
+% S# = C1769331
+
+
 #const k=1. % Number of experienced companies
 #const n=4. % Number of districts
 #const m=3. % Number of companies
