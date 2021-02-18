@@ -2,6 +2,7 @@ import Data.List
 
 type Board = [[Int]]
 
+-- The input sudoku puzzle
 input :: Board
 input = [[3,4,0,0],
          [2,0,3,0],
@@ -25,17 +26,32 @@ valid_cols :: Board -> Bool
 valid_cols x = valid_rows (transpose x)
 
 -- Each quarter is valid
--- There has got to be a better way of doing this
+-- There has got to be a better way of doing this :'(
+-- Should proabably use splitBlocks
 valid_quarters :: Board -> Bool
 valid_quarters x = valid_rows [take 2 (x !! 0) ++ take 2 (x !! 1),
-                    drop 2 (x !! 0) ++ drop 2 (x !! 1),
-                    take 2 (x !! 2) ++ take 2 (x !! 3),
-                    drop 2 (x !! 2) ++ drop 2 (x !! 3)]
+                               drop 2 (x !! 0) ++ drop 2 (x !! 1),
+                               take 2 (x !! 2) ++ take 2 (x !! 3),
+                               drop 2 (x !! 2) ++ drop 2 (x !! 3)]
 
--- The whole board is valid
+-- The whole board is valid 
 valid_board :: Board -> Bool
-valid_board x = valid_rows x && valid_cols x
+valid_board x = valid_rows x && valid_cols x && valid_quarters x
 
--- There are no 0s remaining
-board_finished :: Board -> Bool
-board_finished x = notElem True (map (elem 0) x)
+-- For a given square, what are the possibilities?
+generate_choices :: Int -> [Int]
+generate_choices x = if x == 0
+                     then [1..4]
+                     else [x]
+
+-- For a given board, what are all the possbilbilties for easch square?
+all_possibilities :: Board -> [[[Int]]]
+all_possibilities x = map (map generate_choices) x
+
+-- Given all the possibilities, what are the possible boards?
+all_boards :: [[[Int]]] -> [Board]
+all_boards x = sequence (map sequence x)
+
+-- And solve
+solve :: Board -> [Board]
+solve x = filter valid_board (all_boards (all_possibilities x))
