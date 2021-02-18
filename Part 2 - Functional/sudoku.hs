@@ -55,3 +55,5 @@ all_boards x = sequence (map sequence x)
 -- And solve
 solve :: Board -> [Board]
 solve x = filter valid_board (all_boards (all_possibilities x))
+
+main = print (head (solve input))
