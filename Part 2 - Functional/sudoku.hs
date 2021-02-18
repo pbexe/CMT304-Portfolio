@@ -10,7 +10,7 @@ input = [[3,4,0,0],
          [0,3,0,2],
          [0,0,1,3]]
 
--- If each row, column, and 2x2 block `is_set` then the puzzle is valid
+-- Are there any repeat values?
 is_set :: [Int] -> Bool
 is_set [] = True
 is_set (x:xs) = (if x == 0
@@ -57,4 +57,5 @@ all_puzzles x = sequence (map sequence x)
 solve :: Puzzle -> [Puzzle]
 solve x = filter valid_puzzle (all_puzzles (all_possibilities x))
 
+-- Run the program
 main = print (head (solve input))
