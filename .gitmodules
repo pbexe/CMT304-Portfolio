@@ -1,0 +1,6 @@
+[submodule "Part 1 - Logic/writeup"]
+	path = Part 1 - Logic/writeup
+	url = git@github.com:pbexe/portfolio-part1-writeup.git
+[submodule "Part 2 - Functional/writeup"]
+	path = Part 2 - Functional/writeup
+	url = git@github.com:pbexe/portfolio-part2-writeup.git
