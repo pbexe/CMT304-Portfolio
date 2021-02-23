@@ -1,5 +1,15 @@
+-- --- README --- --
+-- To run with the default puzzle:
+--     Either: `runhaskell ./sudoku.hs`
+--         Or: `ghc ./sudoku.hs && ./sudoku`
+--
+-- Or to use the `solve` function, provide a puzzle of type `[[Int]]` and the 
+-- solve function will return a list of vaild solutions. Therfore to get just
+-- one solution, you can use `head (solve your_puzzle_here)`.
+
 import Data.List
 
+-- Define types
 type Puzzle = [[Int]]
 type Possible_Puzzles = [[[Int]]]
 
