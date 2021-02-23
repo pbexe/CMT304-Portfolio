@@ -9,8 +9,10 @@
 
 import Data.List
 
--- Define types
+-- Define puzzle type as provided by the question
 type Puzzle = [[Int]]
+
+-- Same as `Puzzle` but each value is a list of possible values
 type Possible_Puzzles = [[[Int]]]
 
 -- The input sudoku puzzle
@@ -21,6 +23,7 @@ input = [[3,4,0,0],
          [0,0,1,3]]
 
 -- Are there any repeat values?
+-- This ignores 0s as these are yet unsolved.
 is_set :: [Int] -> Bool
 is_set [] = True
 is_set (x:xs) = (if x == 0
@@ -46,7 +49,7 @@ valid_quarters x = valid_rows [take 2 (x !! 0) ++ take 2 (x !! 1),
                                drop 2 (x !! 2) ++ drop 2 (x !! 3)]
 
 -- The whole puzzle is valid 
-valid_puzzle :: Puzzle -> Bool
+valid_puzzle :: Puzzle -> Bool 
 valid_puzzle x = valid_rows x && valid_cols x && valid_quarters x
 
 -- For a given square, what are the possibilities?
